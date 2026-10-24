@@ -1,0 +1,8 @@
+{
+  "name": "Remix AI Agent Physics Tutor",
+  "description": "An intelligent, interactive physics learning and problem-solving platform for undergraduate university physics students featuring tool-using AI, deterministic calculation tools, interactive physics graphs, guided problem solving, and computational physics lab.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

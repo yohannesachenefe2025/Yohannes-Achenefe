@@ -1,0 +1,809 @@
+# MASTER PROMPT: DEVELOP AN AI AGENT PHYSICS TUTOR
+
+## 1. Project Title
+
+**AI Agent Physics Tutor: An Intelligent, Interactive Physics Learning and Problem-Solving Platform**
+
+## 2. Your Role
+
+Act as an expert team consisting of:
+
+- An AI agent engineer specializing in tool-using language models.
+- A university physics lecturer.
+- An instructional designer for undergraduate physics education.
+- A scientific Python developer.
+- A frontend and backend application developer.
+- A learning analytics and assessment specialist.
+
+Design and implement a functional, interactive web application called **AI Agent Physics Tutor**. The application must help undergraduate students learn physics through conversation, guided reasoning, accurate numerical calculations, interactive graphs, worked examples, practice questions, and personalized feedback.
+
+Do not create only a static landing page or a mockup. Build a working application with functional controls, meaningful sample content, interactive learning activities, and a clear path to connecting a real AI model and persistent storage.
+
+## 3. Project Context
+
+The application is intended for university physics students, especially undergraduate students studying General Physics I and introductory computational physics.
+
+The application should support students who need additional explanations, guided numerical problem-solving, practice exercises, and computational demonstrations outside the classroom.
+
+Use the following educational context:
+
+- Institution: Debre Tabor University, Ethiopia.
+- Department: Physics.
+- Instructor: Dr. Yohannes Achenefe.
+- Target users: Undergraduate physics students.
+- Language: Clear, accessible English, with an architecture that can support Amharic explanations in a later version.
+- Primary objective: Improve conceptual understanding, mathematical problem-solving, scientific reasoning, and independent learning.
+
+## 4. Core Development Objective
+
+Build an AI agent that does more than generate text. It must identify what a student is asking, select an appropriate action, execute an available physics tool when necessary, validate the result, and explain the answer at the student's level.
+
+The agent should follow this workflow:
+
+1. Receive a student's question.
+2. Identify the topic and task type.
+3. Determine whether the student needs a conceptual explanation, numerical calculation, graph, worked example, hint, quiz, or code demonstration.
+4. Select an appropriate tool or response strategy.
+5. Validate required inputs, units, and physical assumptions.
+6. Execute the selected calculation or visualization tool when appropriate.
+7. Check the result for mathematical and physical consistency.
+8. Present a clear explanation, including equations, substitutions, units, and interpretation.
+9. Ask a short follow-up question or offer a relevant practice problem.
+10. Update learning progress when the student is signed in and the required storage service is configured.
+
+Use a modular architecture so that additional tools and physics topics can be added without rewriting the entire application.
+
+## 5. Main Application Interface
+
+Create a professional, modern, responsive interface suitable for desktop computers, tablets, and mobile devices.
+
+Use React and TypeScript if supported by the selected Google AI Studio application workflow. Use a clean component-based architecture and an accessible design.
+
+### Main navigation
+
+Include the following pages or navigation sections:
+
+1. Home Dashboard
+2. Ask the AI Physics Tutor
+3. Learn Physics
+4. Solve a Physics Problem
+5. Interactive Graphs and Simulations
+6. Practice Questions and Quizzes
+7. Computational Physics Lab
+8. My Learning Progress
+9. Instructor Dashboard
+10. Settings and Help
+
+### Visual design
+
+Use a professional science and education theme:
+
+- Dark navy or deep blue for navigation.
+- White or light backgrounds for reading.
+- Blue and gold accents.
+- Clear mathematical typography.
+- Readable equation displays.
+- Cards for learning activities and progress indicators.
+- Interactive charts with labeled axes and units.
+- Responsive layouts and accessible color contrast.
+- Light and dark display modes if feasible.
+
+The home dashboard should display a welcome message, a prominent question input, topic shortcuts, recently studied topics, practice recommendations, and learning progress.
+
+## 6. AI Agent Architecture
+
+Implement the tutor as a tool-using AI agent with distinct responsibilities.
+
+### Agent A: Physics Question Understanding
+
+Analyze the student's message and determine:
+
+- Physics topic.
+- Question type.
+- Required variables and known values.
+- Requested output.
+- Missing information.
+- Appropriate physics tool, if one is available.
+
+Possible task categories include:
+
+- Conceptual explanation.
+- Definition or physical law.
+- Numerical problem.
+- Equation derivation.
+- Graph generation.
+- Multiple-choice question.
+- Hint or step-by-step solution.
+- Python code demonstration.
+- Quiz generation.
+- Review of a student's attempted solution.
+
+The model may suggest an action, but the application must validate the action and its arguments before execution.
+
+### Agent B: Physics Calculation Agent
+
+Use deterministic Python functions or a suitable calculation service for supported numerical problems.
+
+Do not depend exclusively on language-model-generated arithmetic when a calculation tool is available.
+
+Implement a tool registry so the agent can choose among supported tools. Every tool must have a name, description, input schema, output schema, validation rules, and error-handling behavior.
+
+Begin with these tools:
+
+**Tool 1: Calculate acceleration**
+
+Formula:
+
+a = (v - u) / t
+
+Inputs:
+- Initial velocity, u, in m/s.
+- Final velocity, v, in m/s.
+- Elapsed time, t, in seconds.
+
+Output:
+- Acceleration in m/s².
+- Formula used.
+- Substitution and calculation.
+- Physical interpretation.
+
+Reject zero or negative elapsed time for this constant-time calculation and request clarification if inputs are missing.
+
+**Tool 2: Calculate displacement under constant acceleration**
+
+Formula:
+
+s = ut + 1/2 at²
+
+Inputs:
+- Initial velocity in m/s.
+- Acceleration in m/s².
+- Time in seconds.
+
+Output:
+- Displacement in metres.
+- Step-by-step calculation.
+- Relevant assumptions.
+
+**Tool 3: Calculate final velocity under constant acceleration**
+
+Formula:
+
+v = u + at
+
+Validate the input values and explain the result.
+
+**Tool 4: Calculate force**
+
+Formula:
+
+F = ma
+
+Inputs:
+- Mass in kilograms.
+- Acceleration in m/s².
+
+Output:
+- Net force in newtons.
+- Substitution.
+- Explanation of Newton's second law.
+
+**Tool 5: Calculate work**
+
+For a constant force:
+
+W = Fd cos(theta)
+
+Inputs:
+- Force in newtons.
+- Displacement in metres.
+- Angle between force and displacement in degrees.
+
+Output:
+- Work in joules.
+- Explanation of positive, negative, or zero work where relevant.
+
+**Tool 6: Calculate kinetic energy**
+
+Formula:
+
+KE = 1/2 mv²
+
+Inputs:
+- Mass in kilograms.
+- Speed in m/s.
+
+Output:
+- Kinetic energy in joules.
+- Substitution and interpretation.
+
+**Tool 7: Calculate density**
+
+Formula:
+
+rho = m / V
+
+Inputs:
+- Mass in kilograms.
+- Volume in cubic metres.
+
+Output:
+- Density in kg/m³.
+- Unit validation and interpretation.
+
+**Tool 8: Calculate pressure**
+
+Formula:
+
+P = F / A
+
+Inputs:
+- Normal force in newtons.
+- Area in square metres.
+
+Output:
+- Pressure in pascals.
+- Step-by-step solution.
+
+**Tool 9: Calculate heat transfer**
+
+For a temperature change without a phase change:
+
+Q = mc DeltaT
+
+Inputs:
+- Mass in kilograms.
+- Specific heat capacity in J/(kg K).
+- Temperature change in kelvin or degrees Celsius.
+
+Output:
+- Heat transferred in joules.
+- Sign convention and interpretation.
+
+**Tool 10: Generate a physics graph**
+
+Create a graph from student inputs or a selected physics model. Support velocity–time, displacement–time, acceleration–time, force–displacement, and other relevant plots as additional tools are developed.
+
+Use a scientific plotting library or a suitable interactive chart library. Every graph must include a title, labeled axes, units, a legend when needed, and a short explanation.
+
+For every tool, include input validation, clear error messages, unit checks where practical, and automated tests.
+
+## 7. Agent Tool Selection and Execution
+
+Use structured tool calls or an equivalent validated action format supported by the chosen model API.
+
+For example, the agent may internally classify a request as:
+
+- `explain_concept`
+- `calculate_acceleration`
+- `calculate_force`
+- `calculate_work`
+- `plot_velocity_time`
+- `generate_practice_question`
+- `review_student_solution`
+
+Do not execute arbitrary Python code generated by the model. Map approved actions to predefined functions. Validate all parameters, handle exceptions, and return the tool's actual output to the agent.
+
+If a question requires an unsupported calculation, explain the limitation honestly and either solve it through a verified general method or ask the student for the missing information.
+
+Keep the agent's reasoning and tool execution separate from the student's final explanation. Show the relevant formulas, assumptions, calculation steps, and checks rather than exposing private internal reasoning.
+
+## 8. AI Tutor Conversation Interface
+
+Create a chat interface where students can ask questions in natural language.
+
+Example questions:
+
+- Explain Newton's second law in simple language.
+- A car changes its velocity from 5 m/s to 25 m/s in 4 seconds. Calculate its acceleration.
+- Plot velocity against time for this car.
+- Explain the difference between speed and velocity.
+- A 2 kg object accelerates at 3 m/s². Calculate the net force.
+- Give me three practice problems on projectile motion.
+- Check my solution and identify my mistake.
+- Explain why the area under a velocity–time graph represents displacement.
+- Write a Python program to simulate free fall.
+- Give me a hint without showing the complete answer.
+
+The chat should support:
+
+- Conversation history during the active session.
+- Readable equations and mathematical symbols.
+- Code blocks with copy functionality.
+- Clearly formatted numerical solutions.
+- Graphs embedded in the conversation.
+- Follow-up questions.
+- A button to clear or start a new conversation.
+- Loading, error, and retry states.
+- A way for the student to rate an explanation or report an incorrect answer.
+
+## 9. Pedagogical System Prompt for the Physics Tutor
+
+Use the following as the core system instruction for the AI tutor:
+
+"You are an AI Physics Tutor for undergraduate university students. Your purpose is to help students understand physics, develop scientific reasoning, and solve problems independently.
+
+Follow these rules:
+
+1. Explain physics in clear, accessible English.
+2. Adapt explanations to the student's level and stated learning goal.
+3. Define unfamiliar terms before using them extensively.
+4. Distinguish physical concepts, mathematical models, assumptions, and approximations.
+5. Use equations where appropriate and explain what each symbol means.
+6. Identify known quantities and the unknown quantity before solving a numerical problem.
+7. Check units and convert quantities to a consistent system when necessary.
+8. Show the relevant formula, substitution, calculation, final answer, and physical interpretation.
+9. Use a validated calculation tool when one is available and appropriate.
+10. Never invent tool results or claim that a graph, calculation, or simulation was executed when it was not.
+11. If the question is ambiguous, ask a focused clarifying question or state a reasonable assumption explicitly.
+12. If the student's answer is incorrect, identify the specific misconception and guide the student toward correction.
+13. Use hints and guiding questions when the student requests help learning rather than simply receiving the answer.
+14. Provide complete worked solutions when requested, while explaining the underlying method.
+15. Use SI units unless the problem specifies otherwise, and explain conversions.
+16. Verify numerical results for reasonable magnitude, sign, units, and consistency with the physical model.
+17. Do not present uncertain claims as established facts.
+18. Never fabricate scientific references, experimental data, or simulation results.
+19. Encourage independent reasoning, curiosity, and scientific integrity.
+20. Do not shame students for mistakes.
+21. When appropriate, finish with one short check-for-understanding question.
+22. If a problem exceeds the supported tools, explain what additional method or information is needed."
+
+## 10. Guided Problem-Solving Mode
+
+Create a dedicated mode that guides students through problems using the following sequence:
+
+Step 1: Understand the problem.
+
+Step 2: List the known quantities and their units.
+
+Step 3: Identify the unknown quantity.
+
+Step 4: Select the relevant physical law or equation.
+
+Step 5: Rearrange the equation if necessary.
+
+Step 6: Substitute numerical values.
+
+Step 7: Calculate the answer using a validated tool where available.
+
+Step 8: Check units and physical reasonableness.
+
+Step 9: Interpret the result in plain language.
+
+Provide controls for:
+
+- Show a hint.
+- Check my approach.
+- Show the next step.
+- Reveal the complete solution.
+- Generate a similar problem.
+- Try again with different values.
+
+The application should encourage productive effort without preventing students from accessing a full explanation when they need one.
+
+## 11. Physics Learning Library
+
+Organize the learning library into modules.
+
+### Module 1: Preliminaries
+
+- Physical quantities and SI units.
+- Unit conversion.
+- Measurement uncertainty and significant figures.
+- Scalars and vectors.
+- Vector components and unit vectors.
+
+### Module 2: Kinematics
+
+- Position and displacement.
+- Distance and speed.
+- Velocity and acceleration.
+- Motion graphs.
+- Motion with constant acceleration.
+- Free fall.
+- Projectile motion.
+
+### Module 3: Newton's Laws and Dynamics
+
+- Newton's first law.
+- Newton's second law.
+- Newton's third law.
+- Free-body diagrams.
+- Friction.
+- Inclined planes.
+- Circular motion.
+
+### Module 4: Work, Energy, and Momentum
+
+- Work and power.
+- Kinetic and potential energy.
+- Conservation of mechanical energy.
+- Linear momentum.
+- Impulse.
+- Elastic and inelastic collisions.
+
+### Module 5: Fluids
+
+- Density and pressure.
+- Hydrostatic pressure.
+- Pascal's principle.
+- Archimedes' principle.
+- Buoyancy.
+- Continuity equation.
+- Bernoulli's equation.
+
+### Module 6: Heat and Thermodynamics
+
+- Temperature and thermal equilibrium.
+- Thermal expansion.
+- Calorimetry.
+- Specific heat and latent heat.
+- Heat transfer.
+- Ideal gases.
+- First law of thermodynamics.
+- Work done by an expanding gas.
+
+### Module 7: Waves and Oscillations
+
+- Simple harmonic motion.
+- Period and frequency.
+- Wave properties.
+- Sound waves.
+- Superposition and interference.
+
+### Module 8: Electricity and Magnetism
+
+- Electric charge and Coulomb's law.
+- Electric fields and potential.
+- Current and resistance.
+- Basic circuits.
+- Magnetic fields and forces.
+- Electromagnetic induction.
+
+### Module 9: Computational Physics
+
+- Introduction to Python for physics.
+- Numerical calculations and units.
+- Plotting physical data.
+- Numerical errors.
+- Simulation of motion.
+- Simple numerical integration.
+- Modeling and interpreting physical systems.
+
+For every topic, provide:
+
+- Learning objectives.
+- A concise introduction.
+- Concept explanations.
+- Key equations and symbol definitions.
+- Worked examples.
+- Common misconceptions.
+- Practice questions.
+- A short self-assessment.
+- Suggested additional learning resources.
+
+Do not invent the contents of a textbook or claim that a resource has been consulted if it has not been provided or accessed.
+
+## 12. Interactive Graphs and Physics Simulations
+
+Build an interactive visualization area.
+
+Start with a working velocity–time graph.
+
+Allow the student to enter:
+
+- Initial velocity.
+- Final velocity.
+- Time interval.
+
+Calculate the acceleration and display the corresponding velocity–time graph.
+
+The interface should show:
+
+- The graph.
+- Initial and final velocities.
+- The time interval.
+- Calculated acceleration.
+- The slope of the graph.
+- The area under the curve when relevant.
+- A brief interpretation.
+
+Add controls to change parameters and update the graph dynamically.
+
+Later, extend the visualization library to include:
+
+- Free-fall motion.
+- Projectile motion.
+- Newton's second law.
+- Work and kinetic energy.
+- Simple harmonic motion.
+- Wave interference.
+- Electric fields.
+
+Use established simulations, including PhET, where appropriate. Link to official simulations rather than pretending an external simulation is embedded or fully integrated when it is not.
+
+## 13. Practice Questions and Assessment Agent
+
+Create a question-generation and assessment system with:
+
+- Multiple-choice questions.
+- Numerical problems.
+- Short-answer questions.
+- Conceptual questions.
+- Unit-conversion exercises.
+- Graph interpretation questions.
+- Challenge problems.
+
+Allow students to select a topic, difficulty level, and number of questions.
+
+For each submitted answer:
+
+1. Check the answer against a verified answer key or calculation procedure.
+2. Explain why the answer is correct or incorrect.
+3. Identify likely misconceptions when supported by the student's response.
+4. Offer a hint or another attempt.
+5. Display a score and feedback.
+6. Record results only when persistent storage and an appropriate user session are available.
+
+Generate questions with internally consistent numerical values and verified answers. Do not evaluate open-ended answers using keyword matching alone when a more meaningful rubric or model-assisted evaluation is available.
+
+## 14. Computational Physics Lab
+
+Create a Python learning environment or a dedicated section for computational demonstrations.
+
+Include beginner-friendly code examples for:
+
+- Acceleration calculations.
+- Free-fall motion.
+- Velocity–time plotting.
+- Projectile trajectories.
+- Newton's second law.
+- Energy conservation.
+- Numerical integration.
+- Comparing analytical and numerical results.
+
+Use Python, NumPy, and Matplotlib where suitable.
+
+For every code example, include:
+
+- Learning objective.
+- Complete runnable code.
+- Explanation of important lines.
+- Expected output.
+- Plot or numerical result when applicable.
+- A short exercise for modification.
+
+If execution is unavailable inside the web app, provide a downloadable or copyable notebook and instructions for running it in Google Colab. Do not label static code output as live execution.
+
+## 15. Student Progress Dashboard
+
+Create a student dashboard displaying:
+
+- Topics studied.
+- Lessons completed.
+- Quiz scores.
+- Practice activity.
+- Frequently missed concepts.
+- Recommended revision topics.
+- Recent activity.
+- Learning goals.
+
+Use charts where they improve understanding.
+
+Make the distinction between real recorded progress and demonstration data explicit. Do not imply that progress is permanently saved unless a database or other persistent storage has been configured.
+
+Allow students to resume learning where possible.
+
+## 16. Instructor Dashboard
+
+Provide an instructor view with suitable access controls.
+
+Include:
+
+- Topic and lesson management.
+- Question-bank management.
+- Creation of practice sets.
+- Overview of class-level quiz performance.
+- Common misconceptions based on actual submitted responses.
+- Export of permitted assessment results.
+- Learning-resource management.
+
+Use privacy-preserving defaults. Do not expose individual student information to unauthorized users. Do not infer student ability or make high-stakes academic decisions solely from AI-generated assessments.
+
+## 17. Model and Backend Integration
+
+Design the system so the interface and AI agent can use a real language model through an appropriate backend.
+
+Google AI Studio may be used to prototype the interface and integrate a supported Gemini model. Keep API keys and other secrets on the server side, using environment variables or a secure secret-management mechanism.
+
+Do not place private API keys in frontend code, public notebooks, or source repositories.
+
+Provide a clear separation between:
+
+- Frontend interface.
+- Agent orchestration.
+- Language-model service.
+- Physics tool registry.
+- Numerical calculation functions.
+- Visualization functions.
+- Optional database and authentication.
+- Optional learning analytics.
+
+Use structured inputs and outputs, input validation, error handling, rate limits where needed, and appropriate protection against prompt injection and unsafe tool execution.
+
+If a backend, database, or authentication provider is not configured, clearly identify the feature as a prototype or demo and explain what is needed to make it production-ready.
+
+## 18. Relationship to the Existing Python Notebook
+
+Use the uploaded notebook, `My_First_Free_AI_Agent.ipynb`, as a conceptual starting point where its implementation is accessible.
+
+Preserve and improve its central educational pattern:
+
+1. Load or connect to a language model.
+2. Define the physics tutor's instructions.
+3. Create physics calculation functions.
+4. Create graph-generation functions.
+5. Select a suitable tool for a student's question.
+6. Validate tool arguments.
+7. Execute the approved tool.
+8. Return the result with a clear explanation.
+
+The notebook uses a Hugging Face text-generation pipeline and the Qwen2.5-0.5B-Instruct model, together with introductory acceleration and velocity–time graph tools. Treat this as a prototype, not as proof that every tool or application feature is already implemented.
+
+Do not assume Google AI Studio automatically executes the notebook or shares its model, files, functions, or variables. If necessary, create a separate Colab notebook or backend service to host and execute the Python tools, then define the API contract needed for the web application to call them.
+
+Keep the tool functions independent from the language model so that the same validated physics functions can be used with a local model, a hosted model, or a future model provider.
+
+## 19. Reliability, Safety, and Scientific Accuracy
+
+The application must:
+
+- Validate numerical inputs before calculations.
+- Avoid division by zero and invalid mathematical operations.
+- Handle missing variables and ambiguous units.
+- Distinguish assumptions from given facts.
+- Use deterministic calculation functions for supported numerical operations.
+- Verify outputs with unit checks and reasonable-value checks.
+- Clearly report calculation or execution errors.
+- Never fabricate graph data, tool execution, citations, or model performance.
+- Keep student data private and minimize unnecessary collection.
+- Provide accessible explanations for learners with different levels of preparation.
+- Make it possible to report incorrect answers.
+
+Include automated tests for physics formulas, unit conversions, graph data, tool argument validation, and error conditions.
+
+## 20. Development Stages
+
+Build the application incrementally in the following order.
+
+### Stage 1: Functional prototype
+
+Implement:
+
+- Home dashboard.
+- Physics tutor chat interface.
+- Core tutor instructions.
+- Acceleration calculation.
+- Velocity–time graph.
+- Basic worked examples.
+- A small practice-question set.
+
+Use clearly labeled demonstration data where necessary.
+
+### Stage 2: Agent tools
+
+Add:
+
+- Structured task classification.
+- Validated tool selection.
+- Force, work, energy, density, pressure, and heat calculations.
+- Guided problem-solving.
+- Better error handling and automated tests.
+
+### Stage 3: Learning library and assessment
+
+Add the physics modules, lesson pages, question generation, answer checking, hints, and topic-based quizzes.
+
+### Stage 4: Computational Physics Lab
+
+Add runnable or downloadable Python examples, notebook integration, and more interactive scientific visualizations.
+
+### Stage 5: Student accounts and progress
+
+Add authentication, persistent progress storage, and appropriate student and instructor permissions.
+
+### Stage 6: Quality assurance
+
+Test all navigation, forms, calculations, graphs, chat actions, assessment flows, responsive layouts, error states, and security boundaries.
+
+Do not attempt to implement every advanced feature in a single incomplete step. Prioritize a working, testable core application and extend it in stages.
+
+## 21. Required Deliverables
+
+Produce the following:
+
+1. A functional, responsive AI Physics Tutor application.
+2. A clean project structure with reusable components.
+3. A clearly defined AI tutor system instruction.
+4. A physics tool registry with validated inputs and outputs.
+5. Working acceleration and velocity–time graph tools.
+6. A collection of physics lessons and worked examples.
+7. A practice and quiz system with verified answers.
+8. A computational physics learning section.
+9. A student progress interface.
+10. An instructor dashboard prototype.
+11. Setup and deployment instructions.
+12. A description of required environment variables and backend services.
+13. Automated tests for the core physics tools.
+14. A clear list of implemented features, prototype-only features, and remaining work.
+
+## 22. Acceptance Criteria
+
+The first working version must pass these tests:
+
+**Test A: Conceptual explanation**
+
+Input: "Explain Newton's second law."
+
+Expected: A correct, accessible explanation of the relationship between net force, mass, and acceleration, including F = ma and a suitable example.
+
+**Test B: Numerical calculation**
+
+Input: "A car changes velocity from 5 m/s to 25 m/s in 4 seconds. Calculate its acceleration."
+
+Expected:
+- Initial velocity: 5 m/s.
+- Final velocity: 25 m/s.
+- Time: 4 s.
+- Formula: a = (v - u) / t.
+- Calculation: a = (25 - 5) / 4.
+- Answer: 5 m/s².
+- Interpretation: the velocity increases by 5 m/s each second under the stated constant-acceleration assumption.
+
+**Test C: Graph generation**
+
+Input: "Plot velocity against time for a car accelerating from 5 m/s to 25 m/s in 4 seconds."
+
+Expected: A graph with time in seconds on the horizontal axis and velocity in m/s on the vertical axis, showing the specified endpoints under a constant-acceleration assumption. The graph must be generated by the actual plotting tool.
+
+**Test D: Missing information**
+
+Input: "Calculate the acceleration."
+
+Expected: Ask for the required information, such as initial velocity, final velocity, and elapsed time, rather than inventing values.
+
+**Test E: Invalid input**
+
+Input: An acceleration problem with zero elapsed time.
+
+Expected: Reject the invalid calculation and explain that the elapsed time must be greater than zero for this formula.
+
+**Test F: Learning support**
+
+Input: "Give me a hint for solving a Newton's second law problem."
+
+Expected: Provide a helpful hint without automatically revealing the entire solution.
+
+**Test G: Error handling**
+
+Simulate a failed model request or unavailable tool.
+
+Expected: Display a useful error message and a retry option. Never fabricate a successful result.
+
+**Test H: Honest progress tracking**
+
+Complete a quiz in the prototype.
+
+Expected: Display the resulting score accurately. Explain whether it is stored only in the current session or saved persistently.
+
+## 23. Final Instruction to Google AI Studio
+
+Begin by creating the working Stage 1 prototype, not just describing how it might be built.
+
+First establish the application structure and navigation. Then implement the tutor chat interface, core AI integration, acceleration calculation, velocity–time graph, and one small practice quiz.
+
+After implementation, test the acceptance criteria and fix any broken functionality. Then present the project structure, configuration requirements, and a concise list of completed and unfinished features.
+
+Prioritize scientific correctness, useful learning interactions, reliable tool execution, clear explanations, and maintainable code over decorative complexity.
+
+The final result should be a practical AI Agent Physics Tutor that helps students learn physics through conversation, verified calculations, visualization, and guided practice.
